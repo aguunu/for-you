@@ -8,8 +8,6 @@ from collections import defaultdict
 from PIL import Image
 
 import subprocess
-import ctypes
-from ctypes import wintypes
 from multiprocessing import Process
 import vlc
 
@@ -35,29 +33,16 @@ def track(path):
         time.sleep(1)
 
 def open_wnd():
-    # windows API constants
-    SW_MAXIMIZE = 3
-
-    # config for windows API
-    user32 = ctypes.WinDLL("user32", use_last_error=True)
-    user32.FindWindowW.restype = wintypes.HWND
-    user32.FindWindowW.argtypes = [wintypes.LPCWSTR, wintypes.LPCWSTR]
-    user32.ShowWindow.argtypes = [wintypes.HWND, ctypes.c_int]
-
     # open mspain
     subprocess.Popen(["mspaint"])
 
     # wait some time for mspaint to start
-    time.sleep(2)
+    time.sleep(3)
 
-    # find mspaint window using default title ('Untitled - Paint')
-    hwnd = user32.FindWindowW(None, "Untitled - Paint")
-
-    # maximize window if found
-    if hwnd:
-        user32.ShowWindow(hwnd, SW_MAXIMIZE)
-    else:
-        print("No se encontró la ventana :(.")
+    # maximize window
+    pyautogui.hotkey("alt", "space")
+    time.sleep(1)
+    pyautogui.press("x")
 
 def main():
     # open input image and convert to 16 colors palette
