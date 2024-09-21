@@ -1,0 +1,5 @@
+cryptography
+pyautogui
+pillow
+python-vlc
+
