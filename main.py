@@ -135,8 +135,8 @@ def main():
     offset_y = 250
 
     # set custom delay
-    component_delay = 0.00000001
-    line_delay = 0.00000001
+    component_delay = 0.01
+    line_delay = 0.001
 
     for color, components in color_continuous_sets.items():
         print(f"Selecting color: {color}: {len(components)} pixels.")
